@@ -127,6 +127,23 @@
 		layui.config({
 		  base: './res/static/js/' 
 		}).use('blog');	
+		//如果内置的模块本身是依赖jquery，你无需去use jquery，所以上面的写法其实可以是：
+		layui.use('layer', function(){ 
+			var $ = layui.$ //由于layer弹层依赖jQuery，所以可以直接得到
+			,layer = layui.layer;
+			console.log('http://123.207.33.139/api/article');
+			$.ajax({
+				type: "GET",
+				url: "http://123.207.33.139/api/article",
+				success: function(msg){
+		    		console.log(msg);
+		   		}
+			});
+			
+		  //……
+		});
+
+
 	</script>
 </body>
 </html>
