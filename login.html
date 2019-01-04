@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>评论-闲言轻博客</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./res/layui/css/layui.css">
+	<link rel="stylesheet" href="./res/static/css/mian.css">
+</head>
+<body class="lay-blog">
+		<div class="header">
+			<div class="header-wrap">
+				<h1 class="logo pull-left">
+					<a href="index.html">
+						<img src="./res/static/images/logo.png" alt="" class="logo-img">
+						<img src="./res/static/images/logo-text.png" alt="" class="logo-text">
+					</a>
+				</h1>
+				<form class="layui-form blog-seach pull-left" action="">
+					<div class="layui-form-item blog-sewrap">
+					    <div class="layui-input-block blog-sebox">
+					      <i class="layui-icon layui-icon-search"></i>
+					      <input type="text" name="title" lay-verify="title" autocomplete="off"  class="layui-input">
+					    </div>
+					</div>
+				</form>
+				<div class="blog-nav pull-right">
+					<ul class="layui-nav pull-left">
+					  <li class="layui-nav-item layui-this"><a href="/fe/">首页</a></li>
+					  <li class="layui-nav-item"><a href="/fe/message.html">留言</a></li>
+					  <li class="layui-nav-item"><a href="/fe/about.html">关于</a></li>
+					</ul>
+					<a href="#" class="personal pull-left">
+						<i class="layui-icon layui-icon-username"></i>
+					</a>
+				</div>
+				<div class="mobile-nav pull-right" id="mobile-nav">
+					<a href="javascript:;">
+						<i class="layui-icon layui-icon-more"></i>
+					</a>
+				</div>
+			</div>
+			<ul class="pop-nav" id="pop-nav">
+				<li><a href="/fe/index.html">首页</a></li>
+				<li><a href="/fe/message.html">留言</a></li>
+				<li><a href="/fe/about.html">关于</a></li>
+			</ul>
+		</div>
+		<div class="container-wrap">
+			<div style="width: 60%;margin:auto;">
+			<form class="layui-form" action="">
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">用户名</label>
+			    <div class="layui-input-block">
+			      <input type="text" name="name" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">密码框</label>
+			    <div class="layui-input-inline">
+			      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+			    </div>
+			    <div class="layui-form-mid layui-word-aux">不少于6位</div>
+			  </div>
+			  <!-- <div class="layui-form-item">
+			    <label class="layui-form-label">选择框</label>
+			    <div class="layui-input-block">
+			      <select name="city" lay-verify="required">
+			        <option value=""></option>
+			        <option value="0">北京</option>
+			        <option value="1">上海</option>
+			        <option value="2">广州</option>
+			        <option value="3">深圳</option>
+			        <option value="4">杭州</option>
+			      </select>
+			    </div>
+			  </div> -->
+			  <!-- <div class="layui-form-item">
+			    <label class="layui-form-label">复选框</label>
+			    <div class="layui-input-block">
+			      <input type="checkbox" name="like[write]" title="写作">
+			      <input type="checkbox" name="like[read]" title="阅读" checked>
+			      <input type="checkbox" name="like[dai]" title="发呆">
+			    </div>
+			  </div> -->
+			  <!-- <div class="layui-form-item">
+			    <label class="layui-form-label">开关</label>
+			    <div class="layui-input-block">
+			      <input type="checkbox" name="switch" lay-skin="switch">
+			    </div>
+			  </div> -->
+			  <!-- <div class="layui-form-item">
+			    <label class="layui-form-label">单选框</label>
+			    <div class="layui-input-block">
+			      <input type="radio" name="sex" value="男" title="男">
+			      <input type="radio" name="sex" value="女" title="女" checked>
+			    </div>
+			  </div> -->
+			  <div class="layui-form-item">
+			    <div class="layui-input-block">
+			      <button class="layui-btn" lay-submit lay-filter="formLogin">立即提交</button>
+			      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			    </div>
+			  </div>
+			</form>
+			</div>
+		</div>
+		<div class="footer">
+			<p>
+				<span>&copy; 2018</span>
+				<span><a href="http://www.layui.com" target="_blank">layui.com</a></span> 
+				<span>MIT license</span>
+			</p>
+			<p><span>人生就是一场修行</span></p>
+		</div>
+	<script src="./res/layui/layui.js"></script>
+	<script>
+		layui.config({
+		  base: './res/static/js/' 
+		}).use('blog');
+		layui.use(['layer', 'form','laydate'] , function(){
+		  var form = layui.form;
+		  var $ = layui.$
+		  //监听提交
+		  form.on('submit(formLogin)', function(data){
+			$.ajax({
+                url:'http://127.0.0.1:8000/api/h/register',
+                method:'post',
+                data:data.field,
+                dataType:'JSON',
+                success:function(res){
+                	layer.msg(res.message);
+                    if(res.code == 0){
+                    	setTimeout(window.location.href="http://123.207.33.139/fe/index.html",50000)
+                    }
+                },
+                error:function (data) {
+                }
+            })
+		    return false;
+		  });
+		});
+	</script>
+</body>
+</html>

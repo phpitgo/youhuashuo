@@ -32,7 +32,7 @@
 					  <li class="layui-nav-item"><a href="/fe/message.html">留言</a></li>
 					  <li class="layui-nav-item"><a href="/fe/about.html">关于</a></li>
 					</ul>
-					<a href="#" class="personal pull-left">
+					<a href="/fe/login.html" class="personal pull-left">
 						<i class="layui-icon layui-icon-username"></i>
 					</a>
 				</div>
@@ -85,6 +85,23 @@
 								</a>
 							</div>
 						</div>
+						<div class="coupon-item">
+							<div class="style-one">
+								<div class="info-box">
+									<p class="nick">京东平台优惠劵</p>
+									<div class="coupon-money">
+										<div class="lay of">￥<em>10</em></div>
+										<div class="lay">
+											<p class="tit">优惠劵</p>
+											<p class="demand">满100元可用</p>
+										</div>
+									</div>
+								</div>
+								<a href="javascript:;" class="get-btn">
+									<span>立即领取</span>
+								</a>
+							</div>
+						</div>	
 						<!-- 优惠券 end-->
 					</div>
 					<div class="item-btn">
@@ -111,7 +128,7 @@
 			,layer = layui.layer;
 			$.ajax({
 				type: "GET",
-				url: "http://123.207.33.139/api/article",
+				url: "http://123.207.33.139/api/h/article",
 				success: function(msg){
 		    		console.log(msg);
 		    		// console.log(msg.articles.data);
@@ -120,7 +137,7 @@
 		    		var data = msg.articles.data;
 		    		var str = '';
 		    		for (var i = 0; i < to - from + 1; i ++) {
-		    			str = str + '<div class="item"><div class="item-box  layer-photos-demo1 layer-photos-demo"><h3><a href="details.html">'+ data[i].title +'</a></h3><h5>发布于：<span>刚刚</span></h5><p>'+ data[i].content+'</p><img src="./res/static/images/item.png" alt=""></div><div class="comment count"><a href="details.html#comment">评论</a><a href="javascript:;" class="like">点赞</a></div></div>';
+		    			str = str + '<div class="item"><div class="item-box  layer-photos-demo1 layer-photos-demo"><h3><a href="details.html">'+ data[i].title +'</a></h3><h5>发布于：<span>'+ data[i].create_time+'</span></h5><p>'+ data[i].sub_content+'</p><img src="./res/static/images/item.png" alt=""></div><div class="comment count"><a href="details.html#comment">评论</a><a href="javascript:;" class="like">点赞</a></div></div>';
 		    		}
 		    		
 		    		$('.contar-wrap').append(str);
