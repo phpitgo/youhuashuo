@@ -112,14 +112,15 @@
 		layui.config({
 		  base: './res/static/js/' 
 		}).use('blog');
-		layui.use('layer', function(){ 
+		layui.use(['layer', 'conf'], function(){ 
 			var $ = layui.$ //由于layer弹层依赖jQuery，所以可以直接得到
 			,layer = layui.layer;
 			var id = GetQueryString("id");
+			var host = layui.conf.host;
 			console.log(id);
 			$.ajax({
 				type: "GET",
-				url: "http://127.0.0.1:8000/api/h/articles/"+id,
+				url: host + "api/h/articles/"+id,
 				success: function(msg){
 					var data = msg.data.article;
 					console.log(data);

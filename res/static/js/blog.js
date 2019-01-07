@@ -6,7 +6,7 @@
  @Site：http://www.layui.com/template/xianyan/
     
  */
-layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
+layui.define(['element', 'form','laypage','jquery','laytpl', 'conf'],function(exports){
   var element = layui.element
   ,form = layui.form
   ,laypage = layui.laypage
