@@ -119,11 +119,10 @@
 		layui.config({
 		  base: './res/static/js/' 
 		}).use('blog');
-		layui.use(['layer', 'form','laydate', 'conf', 'cookie'] , function(){
+		layui.use(['layer', 'form','laydate', 'conf', 'jquery', 'cookie'] , function(){
 		  var form = layui.form;
-		  var $ = layui.$;
+		  var $ = layui.jquery;
 		  var host = layui.conf.host;
-		  var cookie = layui.cookie;
 		  index = host+'fe/index.html';
 		  //监听提交
 		  form.on('submit(formLogin)', function(data){
