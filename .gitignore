@@ -79,4 +79,4 @@ node_modules/
 _site/
 
 # config
-conf.js
+/res/static/js/conf.js
