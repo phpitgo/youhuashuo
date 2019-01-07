@@ -134,8 +134,10 @@
                 success:function(res){
                 	layer.msg(res.message);
                     if(res.code == 0){
+                    	$.cookie('h_token', res.data.token, { expires: 7 });
                     	countDown();
                     }
+
                 },
                 error:function (data) {
                 }
