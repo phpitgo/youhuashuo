@@ -115,23 +115,26 @@
 		</div>
 	<script src="./res/layui/layui.js"></script>
 	<script>
+		var index = '';
 		layui.config({
 		  base: './res/static/js/' 
 		}).use('blog');
-		layui.use(['layer', 'form','laydate'] , function(){
+		layui.use(['layer', 'form','laydate', 'conf'] , function(){
 		  var form = layui.form;
-		  var $ = layui.$
+		  var $ = layui.$;
+		  var host = layui.conf.host;
+		  var index = host+'fe/index.html';
 		  //监听提交
 		  form.on('submit(formLogin)', function(data){
 			$.ajax({
-                url:'http://127.0.0.1:8000/api/h/register',
+                url: host + 'api/h/register',
                 method:'post',
                 data:data.field,
                 dataType:'JSON',
                 success:function(res){
                 	layer.msg(res.message);
                     if(res.code == 0){
-                    	setTimeout(window.location.href="http://123.207.33.139/fe/index.html",50000)
+                    	countDown();
                     }
                 },
                 error:function (data) {
@@ -140,6 +143,11 @@
 		    return false;
 		  });
 		});
+		function countDown(){
+			//三秒之后跳转页面
+			setTimeout("location.href='"+index+"'",3000);
+                //setTimeout("location.href='index.html'",3000);
+		}
 	</script>
 </body>
 </html>
