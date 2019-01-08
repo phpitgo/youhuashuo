@@ -119,6 +119,7 @@
 		</div>
 	<script src="./res/layui/layui.js"></script>
 	<script>
+		var register = '';
 		layui.config({
 		  base: './res/static/js/' 
 		}).use('blog');	
@@ -127,14 +128,17 @@
 			var $ = layui.jquery //由于layer弹层依赖jQuery，所以可以直接得到
 			,layer = layui.layer;
 			var host = layui.conf.host;
-			console.log($.cookie('h_token'));
+			register = host+'fe/register.html';
 			$.ajax({
 				type: "GET",
 				url: host + "api/h/articles",
-				headers:{'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjMuMjA3LjMzLjEzOVwvYXBpXC9oXC9yZWdpc3RlciIsImlhdCI6MTU0Njg1NDQ3MywiZXhwIjoxNTQ2ODU4MDczLCJuYmYiOjE1NDY4NTQ0NzMsImp0aSI6IjZjUW1uNDJlRHhZVzB5bm8iLCJzdWIiOjY2LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.GqPeZcMCHa4-Fha-lvIuCPBN0QoK00aBI_GE6B8kRto'},
+				headers:{'Authorization': 'Bearer '+ $.cookie('h_token')},
 				success: function(msg){
 					if(msg.code != 0){
 						layer.msg(msg.message);
+						if(msg.code == 401){
+							countDown();
+						}
 					}else{
 						var to = msg.data.articles.to;
 			    		var from = msg.data.articles.from;
@@ -152,7 +156,11 @@
 		  //……
 		});
 
-
+		function countDown(){
+			//三秒之后跳转页面
+			setTimeout("location.href='"+register+"'",3000);
+                //setTimeout("location.href='index.html'",3000);
+		}
 	</script>
 </body>
 </html>

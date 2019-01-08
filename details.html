@@ -103,6 +103,7 @@
 
 	</script>
 	<script>
+		var register = '';
 		function GetQueryString(name)
 		{
 		     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -117,22 +118,34 @@
 			,layer = layui.layer;
 			var id = GetQueryString("id");
 			var host = layui.conf.host;
+			register = host+'fe/register.html';
 			console.log(id);
 			$.ajax({
 				type: "GET",
 				url: host + "api/h/articles/"+id,
+				headers:{'Authorization': 'Bearer '+ $.cookie('h_token')},
 				success: function(msg){
-					var data = msg.data.article;
-					console.log(data);
-					var str = '<div class="item-box  layer-photos-demo1 layer-photos-demo"><h3><a href="details.html">'+data.title +'</a></h3><h5>发布于：<span>'+ data.create_time +'</span></h5><p>'+ data.content +'</p><img src="./res/static/images/item.png" alt=""><div class="count layui-clear"><span class="pull-left">阅读 <em>100000+</em></span><span class="pull-right like"><i class="layui-icon layui-icon-praise"></i><em>999</em></span></div></div>';
-		   			$('.item').append(str);
+					if(msg.code != 0){
+						layer.msg(msg.message);
+						if(msg.code == 401){
+							countDown();
+						}
+					}else{
+						var data = msg.data.article;
+						var str = '<div class="item-box  layer-photos-demo1 layer-photos-demo"><h3><a href="details.html">'+data.title +'</a></h3><h5>发布于：<span>'+ data.create_time +'</span></h5><p>'+ data.content +'</p><img src="./res/static/images/item.png" alt=""><div class="count layui-clear"><span class="pull-left">阅读 <em>100000+</em></span><span class="pull-right like"><i class="layui-icon layui-icon-praise"></i><em>999</em></span></div></div>';
+		   				$('.item').append(str);
+		   			}
 		   		}
 			});
 			
 		  //……
 		});
 
-
+		function countDown(){
+			//三秒之后跳转页面
+			setTimeout("location.href='"+register+"'",3000);
+                //setTimeout("location.href='index.html'",3000);
+		}
 	</script>
 </body>
 </html>
