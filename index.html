@@ -122,9 +122,9 @@
 		var register = '';
 		layui.config({
 		  base: './res/static/js/' 
-		}).use(['blog', 'authorization']);	
+		}).use('blog');	
 		//如果内置的模块本身是依赖jquery，你无需去use jquery，所以上面的写法其实可以是：
-		layui.use(['layer', 'conf', 'jquery', 'cookie'], function(){ 
+		layui.use(['layer', 'conf', 'jquery', 'cookie', 'authorization'], function(){ 
 			var $ = layui.jquery //由于layer弹层依赖jQuery，所以可以直接得到
 			,layer = layui.layer;
 			var host = layui.conf.host;
@@ -132,7 +132,7 @@
 			$.ajax({
 				type: "GET",
 				url: host + "api/h/articles",
-				headers:{'Authorization': 'Bearer '+ $.cookie('h_token')},
+				headers:{'Authorization': 'Bearer '+ 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjMuMjA3LjMzLjEzOVwvYXBpXC9oXC9yZWdpc3RlciIsImlhdCI6MTU0Njg1NDQ3MywiZXhwIjoxNTQ2ODU4MDczLCJuYmYiOjE1NDY4NTQ0NzMsImp0aSI6IjZjUW1uNDJlRHhZVzB5bm8iLCJzdWIiOjY2LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.GqPeZcMCHa4-Fha-lvIuCPBN0QoK00aBI_GE6B8kRto'}, //$.cookie('h_token')
 				success: function(msg){
 					if(msg.code != 0){
 						layer.msg(msg.message);
