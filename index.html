@@ -122,7 +122,7 @@
 		var register = '';
 		layui.config({
 		  base: './res/static/js/' 
-		}).use('blog');	
+		}).use(['blog', 'authorization']);	
 		//如果内置的模块本身是依赖jquery，你无需去use jquery，所以上面的写法其实可以是：
 		layui.use(['layer', 'conf', 'jquery', 'cookie'], function(){ 
 			var $ = layui.jquery //由于layer弹层依赖jQuery，所以可以直接得到
