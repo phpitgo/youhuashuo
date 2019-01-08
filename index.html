@@ -136,9 +136,6 @@
 				success: function(msg){
 					if(msg.code != 0){
 						layer.msg(msg.message);
-						if(msg.code == 401){
-							countDown();
-						}
 					}else{
 						var to = msg.data.articles.to;
 			    		var from = msg.data.articles.from;
@@ -150,7 +147,8 @@
 			    		
 			    		$('.contar-wrap').append(str);
 					}
-		   		}
+		   		},
+
 			});
 			
 		  //……
